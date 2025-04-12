@@ -29,7 +29,7 @@ OBS.: Esse projeto nasceu a partir de um exercício proposto pelo prof. Vladimir
 
 ### Exercícios Opcionais:
 
-```Implementar uma opção para pular a carta da rodada, sem adicionar em nenhuma pilha. Nesse caso, será preciso criar uma pilha adicional para guardar as cartas puladas. Quando acabarem as cartas do baralho, se existirem cartas nessa pilha adicional, retirar todas e adicionar no baralho, para prosseguir o jogo.``
+```Implementar uma opção para pular a carta da rodada, sem adicionar em nenhuma pilha. Nesse caso, será preciso criar uma pilha adicional para guardar as cartas puladas. Quando acabarem as cartas do baralho, se existirem cartas nessa pilha adicional, retirar todas e adicionar no baralho, para prosseguir o jogo.```
 
 ```Só permitir que cada coluna da mesa receba um único naipe.```
 
