@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <windows.h>
 #define MAX 13
 
 using namespace std;
@@ -96,5 +97,95 @@ bool pushCardInTheTable(string card, int pilha){
 
     // Falta fazer
 
+    if(pilha < 0 || pilha > 3) return false;
+
+    if(isFull(topo_mesa[pilha])) return false;
+
+    char suit = getSuit(card);
+    string value_card = getValue(card);
+    int value = getNumValue(value_card);
+
+    if(isEmpty(topo_mesa[pilha])){
+
+        if(value != MAX){
+
+            cout << "\nErro: só é permitido iniciar a pilha com um Rei (K).\n";
+            return false;
+        }
+
+        mesa[pilha][++topo_mesa[pilha]] = card;
+        return true;
+    }
+
+    /* Restrições Opcionais:
+        - mesmo naipe
+        - ordem decrescente
+    */
+
+    string topo = top(pilha);
+    char suit_top = getSuit(topo);
+    string value_topo = getValue(topo);
+    int value_n_topo = getNumValue(value_topo);
+
+    if(suit != suit_top){
+        cout << "Erro: só pode colocar cartas do mesmo naipe na pilha. \n";
+        return false;
+    }
+
+    if(value != value_n_topo -1){
+        cout << "Erro: a carta deve estar em ordem decrescente. \n";
+        return false;
+    }
+
+    mesa[pilha][++topo_mesa[pilha]] = card;
+
     return true;
+}
+
+int main() {
+    // faz o console imprimir UTF-8 - devido aos símbolos Unicode do baralho
+    SetConsoleOutputCP(CP_UTF8);
+
+    while(topo_baralho >= 0 || topo_puladas >= 0){
+
+        if(topo_baralho < 0){
+            refreshBaralho();
+            if(topo_baralho < 0) break;
+        }
+
+        string card = baralho[topo_baralho--];
+
+        cout << "\n==== Nova Rodada ====\n";
+        cout << "Carta da rodada: [" << card << "]\n";
+
+        cout << "Escolha uma pilha para colocar a carta (1-4) ou 0 para pular: ";
+
+        int pilha;
+        cin >> pilha;
+
+        cout << endl;
+
+        if(pilha == 0){
+
+            pushPulada(card);
+
+            cout << "Carta pulada!\n";
+        }else if(pilha >= 1 && pilha <= 4){
+
+            if(!pushCardInTheTable(card, pilha - 1)){
+                cout << "A carta não pôde ser colocada. Ela será pulada.\n";
+                pushPulada(card);
+            }
+        }else{
+
+            cout << "Escolha inválida. A carta será pulada.\n";
+            pushPulada(card);
+        }
+
+        showTable();
+    }
+
+
+    cout << "===== Fim do Jogo! ====\n";
+    return 0;
 }
