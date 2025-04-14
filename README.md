@@ -4,6 +4,15 @@ Jogo de Paciência (Solitaire) implementado em C++ com interface gráfica usando
 
 OBS.: Esse projeto nasceu a partir de um exercício proposto pelo prof. Vladimir Marques Erthal, no Cefet RJ - Maria da Graça, em sala de aula. Os requisitos do exercícios podem ser encontrados nesse mesmo README.
 
+## Setup
+
+<ul>
+    <li>Instale o <a href="https://cmake.org/download/">CMake</a></li>
+    <li>Instale a biblioteca <a href="https://www.sfml-dev.org/download/">SFML (v 2.5.1)</a> e cole na raiz (C:\)</li>
+    <li>Execute CMake a partir dos comandos de CMakeLists.txt</li>
+    <li>Instale as extensões "C/C++" e "Cmake Tools" no VS Code</li>
+</ul>
+
 ## 📦 Funcionalidades
 
 - Baralho embaralhado com 52 cartas
