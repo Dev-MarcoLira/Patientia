@@ -39,11 +39,13 @@ string top(int pilha){
 }
 
 char getSuit(string card){
+    
     return card[0];
 }
 
 string getValue(string card){
-    return card.substr(1);
+    
+    return card.substr(card.size() - (card.size() == 3 ? 2 : 1));
 }
 
 int getNumValue(string value){
@@ -95,8 +97,6 @@ void showTable(){
 
 bool pushCardInTheTable(string card, int pilha){
 
-    // Falta fazer
-
     if(pilha < 0 || pilha > 3) return false;
 
     if(isFull(topo_mesa[pilha])) return false;
@@ -107,14 +107,20 @@ bool pushCardInTheTable(string card, int pilha){
 
     if(isEmpty(topo_mesa[pilha])){
 
-        if(value != MAX){
-
+        if(value_card != "K"){
             cout << "\nErro: só é permitido iniciar a pilha com um Rei (K).\n";
             return false;
         }
 
         mesa[pilha][++topo_mesa[pilha]] = card;
         return true;
+
+    }else{    
+        if(value_card == "K"){
+
+            cout << "\nErro: só é permitido um Rei (K) por pilha.\n";
+            return false;                
+        }
     }
 
     /* Restrições Opcionais:
@@ -132,10 +138,10 @@ bool pushCardInTheTable(string card, int pilha){
         return false;
     }
 
-    if(value != value_n_topo -1){
+   /* if(value != value_n_topo -1){
         cout << "Erro: a carta deve estar em ordem decrescente. \n";
         return false;
-    }
+    }*/
 
     mesa[pilha][++topo_mesa[pilha]] = card;
 
