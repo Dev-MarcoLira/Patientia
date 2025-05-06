@@ -31,8 +31,22 @@ void Game::carregarBaralho() {
 
     for (const auto& valor : embaralhado) {
         
+        string textName, suit;
         sf::Texture* textura = new sf::Texture();
-        string path = "assets/cards/" + valor + ".png";
+
+        char rank = (char) valor[1];
+
+        switch (valor[0]) {
+            case '♣': suit = "clubs"; break;
+            case '♥': suit = "hearts"; break;
+            case '♦': suit = "diamonds"; break;
+            case '♠': suit = "spades"; break;
+            default: suit = "spades";
+        }
+
+        textName = rank + "_of_" + suit;
+
+        string path = "assets/cards/" + textName + ".png";
 
         if (!textura->loadFromFile(path)) {
             delete textura;

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Patientia.dir/src/Card.cpp.o CMakeFiles/Patientia.dir/src/Game.cpp.o CMakeFiles/Patientia.dir/src/Main.cpp.o CMakeFiles/Patientia.dir/src/Stack.cpp.o CMakeFiles/Patientia.dir/src/Utils.cpp.o -o Patientia  /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.6.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.6.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.6.1 
