@@ -17,35 +17,36 @@ Game::Game() : window(sf::VideoMode(1000, 700), "Patientia") {
 void Game::carregarBaralho() {
 
     string valores[] = {
-        "♣8","♣A","♥K","♣7","♦K","♦9","♣2","♥Q","♥J","♥A",
-        "♦A","♥5","♦3","♠9","♣4","♦2","♦J","♣Q","♥9","♦Q",
-        "♥6","♠A","♥3","♠3","♥7","♣K","♠10","♠4","♠Q","♦10",
-        "♠5","♠J","♣9","♥4","♣J","♠2","♥10","♠7","♣10","♠6",
-        "♦8","♣6","♦4","♦6","♥2","♥8","♠8","♣3","♦5","♦7",
-        "♠K","♣5"
+        "C8","CA","HK","C7","DK","D9","C2","HQ","HJ","HA",
+        "DA","H5","D3","S9","C4","D2","DJ","CQ","H9","DQ",
+        "H6","SA","H3","S3","H7","CK","S10","S4","SQ","D10",
+        "S5","SJ","C9","H4","CJ","S2","H10","S7","C10","S6",
+        "D8","C6","D4","D6","H2","H8","S8","C3","D5","D7",
+        "SK","C5"
     };
 
     vector<string> embaralhado(begin(valores), end(valores));
     
     shuffle(embaralhado.begin(), embaralhado.end(), mt19937(random_device()()));
 
-    for (const auto& valor : embaralhado) {
-        
-        string textName, suit;
+    for (const string& valor : embaralhado) {
+        string suit, rank = valor.substr(1);
+
+        if(rank == "A") rank = "ace";
+        else if(rank == "J") rank = "jack";
+        else if(rank == "Q") rank = "queen";
+        else if(rank == "K") rank = "king";
+
         sf::Texture* textura = new sf::Texture();
 
-        char rank = (char) valor[1];
-
-        switch (valor[0]) {
-            case '♣': suit = "clubs"; break;
-            case '♥': suit = "hearts"; break;
-            case '♦': suit = "diamonds"; break;
-            case '♠': suit = "spades"; break;
-            default: suit = "spades";
+        switch (valor[0]){
+            case 'C': suit = "clubs"; break;
+            case 'H': suit = "hearts"; break;
+            case 'D': suit = "diamonds"; break;
+            case 'S': suit = "spades"; break;
         }
 
-        textName = rank + "_of_" + suit;
-
+        string textName = rank + "_of_" + suit;
         string path = "assets/cards/" + textName + ".png";
 
         if (!textura->loadFromFile(path)) {
@@ -67,7 +68,7 @@ void Game::run() {
     btnIniciar.setPosition(400, 300);
 
     sf::RectangleShape btnBox(sf::Vector2f(200, 60));
-    btnBox.setFillColor(sf::Color::Green);
+    btnBox.setFillColor(sf::Color(230, 220, 193));
     btnBox.setPosition(390, 290);
 
     while (window.isOpen())
@@ -167,7 +168,7 @@ void Game::atualizar() {
 }
 
 void Game::renderizar() {
-    window.clear(sf::Color(10, 100, 10));
+    window.clear(sf::Color(230, 220, 193));
 
     if (temCartaAtual)
         cartaAtual.draw(window, 400, 50);
